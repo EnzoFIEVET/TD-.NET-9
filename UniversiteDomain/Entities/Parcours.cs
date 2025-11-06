@@ -16,4 +16,4 @@ public class Parcours
     {
         return "ID "+Id +" : "+NomParcours+" - Master "+AnneeFormation;
     }
-}
+} 

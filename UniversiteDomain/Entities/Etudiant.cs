@@ -15,4 +15,4 @@ public class Etudiant
     {
         return $"ID {Id} : {NumEtud} - {Nom} {Prenom} inscrit en "/*+ParcoursSuivi*/;
     }
-}
+} 
