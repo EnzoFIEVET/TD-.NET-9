@@ -24,7 +24,6 @@ public class CreateParcoursUseCase(IParcoursRepository parcoursRepository)
     {
         ArgumentNullException.ThrowIfNull(parcours);
         ArgumentNullException.ThrowIfNull(parcours.NomParcours);
-        ArgumentNullException.ThrowIfNull(parcours.AnneeFormation);
         ArgumentNullException.ThrowIfNull(parcoursRepository);
         
         // On recherche un étudiant avec le même numéro étudiant
@@ -35,7 +34,7 @@ public class CreateParcoursUseCase(IParcoursRepository parcoursRepository)
         if (existe is {Count:>0}) throw new DuplicateParcoursException(parcours.ToString()+ " - ce parcours existe déjà");
 
         // Le métier définit que le nom doit contenir plus de 1 lettre
-        if (parcours.NomParcours.Length > 0) throw new InvalidNomParcoursException(parcours.NomParcours +" incorrect - Le nom du parcours doit contenir au moins 1 caractère");
+        if (parcours.NomParcours.Length < 1) throw new InvalidNomParcoursException(parcours.NomParcours +" incorrect - Le nom du parcours doit contenir au moins 1 caractère");
         
         // Le métier définit que l'année de formation doit ếtre égale à 1 ou 2 
         if (!parcours.AnneeFormation.Equals(1) && !parcours.AnneeFormation.Equals(2)) throw new InvalidAnneeFormationException(parcours.AnneeFormation +" incorrect - L'année de formation doit être 1 ou 2");

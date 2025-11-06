@@ -1,14 +1,6 @@
 using UniversiteDomain.DataAdapters;
 using UniversiteDomain.Entities;
-
-namespace UniversiteDomain.UseCases.ParcoursUseCases.EtudiantDansParcours;
-
-public interface AddEtudiantDansParcoursUseCase
-{
-    using UniversiteDomain.DataAdapters;
-using UniversiteDomain.Entities;
-using UniversiteDomain.Exceptions.EtudiantExceptions;
-using UniversiteDomain.Exceptions.ParcoursExceptions;
+using UniversiteDomain.Exceptions.EtudiantDansParcoursExceptions;
 
 namespace UniversiteDomain.UseCases.ParcoursUseCases.EtudiantDansParcours;
 
@@ -41,7 +33,7 @@ public class AddEtudiantDansParcoursUseCase(IEtudiantRepository etudiantReposito
 
     private async Task CheckBusinessRules(long idParcours, long idEtudiant)
     {
-				// Vérification des paramètres
+        // Vérification des paramètres
         ArgumentNullException.ThrowIfNull(idParcours);
         ArgumentNullException.ThrowIfNull(idEtudiant);
         
@@ -63,5 +55,4 @@ public class AddEtudiantDansParcoursUseCase(IEtudiantRepository etudiantReposito
         List<Etudiant> inscrit = await etudiantRepository.FindByConditionAsync(e=>e.Id.Equals(idEtudiant) && e.ParcoursSuivi.Id.Equals(idParcours));
         if (inscrit is { Count: > 0 }) throw new DuplicateInscriptionException(idEtudiant+" est déjà inscrit dans le parcours dans le parcours : "+idParcours);      
     }
-}
 }

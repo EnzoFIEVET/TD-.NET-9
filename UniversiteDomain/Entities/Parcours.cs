@@ -4,7 +4,7 @@ public class Parcours
 {
     public long Id { get; set; }
     public string NomParcours { get; set; } = String.Empty;
-    public int AnneeFormation { get; set; } = 1;
+    public int AnneeFormation { get; set; }
 
     // OneToMany : un parcours contient plusieurs étudiants
     // Remarque : pour éviter quelques NullPointerException disgracieux,
