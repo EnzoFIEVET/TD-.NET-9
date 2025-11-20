@@ -28,7 +28,7 @@ public class CreateParcoursUseCase(IRepositoryFactory parcoursRepository)
         ArgumentNullException.ThrowIfNull(parcoursRepository);
         
         // On recherche un étudiant avec le même numéro étudiant
-        // On recherche un parcour avec le même nom et la; même année de formation
+        // On recherche un parcour avec le même nom et la même année de formation
         List<Parcours> existe = await parcoursRepository.ParcoursRepository().FindByConditionAsync(e=>e.NomParcours.Equals(parcours.NomParcours) && e.AnneeFormation.Equals(parcours.AnneeFormation));
 
         // Si un parcours avec le même nom et la même année de formation existe déjà, on lève une exception personnalisée
