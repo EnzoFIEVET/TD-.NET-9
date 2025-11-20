@@ -2,6 +2,7 @@ using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteDomain.Entities;
 using UniversiteDomain.Exceptions.EtudiantDansParcoursExceptions;
 using UniversiteDomain.Exceptions.ParcoursExceptions;
+using UniversiteDomain.Exceptions.UeDansParcoursExceptions;
 using UniversiteDomain.Exceptions.UeExceptions;
 
 namespace UniversiteDomain.UseCases.ParcoursUseCases.UeDansParcours;
