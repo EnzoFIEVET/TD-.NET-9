@@ -1,9 +1,7 @@
 using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteDomain.Entities;
 using UniversiteDomain.Exceptions.EtudiantDansParcoursExceptions;
-using UniversiteDomain.Exceptions.ParcoursExceptions;
 using UniversiteDomain.Exceptions.UeDansParcoursExceptions;
-using UniversiteDomain.Exceptions.UeExceptions;
 
 namespace UniversiteDomain.UseCases.ParcoursUseCases.UeDansParcours;
 
@@ -22,7 +20,7 @@ public class AddUeDansParcoursUseCase(IRepositoryFactory repositoryFactory)
           return await repositoryFactory.ParcoursRepository().AddUeAsync(idParcours, idUe);
       }
 
-      // Rajout de plusieurs étudiants dans un parcours
+      // Rajout de plusieurs Ues dans un parcours
       public async Task<Parcours> ExecuteAsync(Parcours parcours, List<Ue> ues)
       {
           ArgumentNullException.ThrowIfNull(ues);
@@ -65,7 +63,7 @@ public class AddUeDansParcoursUseCase(IRepositoryFactory repositoryFactory)
             // On recherche si l'ue qu'on veut ajouter n'existe pas déjà
             List<Ue> inscrites = parcours[0].UesEnseignees;    
             var trouve=inscrites.FindAll(e=>e.Id.Equals(idUe));
-            if (trouve !=null) throw new DuplicateUeDansParcoursException(idUe+" est déjà présente dans le parcours : "+idParcours);   
+            if (trouve is { Count:> 0 }) throw new DuplicateUeDansParcoursException(idUe+" est déjà présente dans le parcours : "+idParcours);   
         }
     }
 }
